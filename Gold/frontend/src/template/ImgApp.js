@@ -66,7 +66,7 @@ export default class ImgApp extends Component {
 
 
                         <Col xs={12} md={12} lg={3} lgOffset={1} >
-                            <h1>Pessoa Fisica</h1>
+                            <h1>Pessoa Fisíca</h1>
                             <Image
                                 src={Img3}
                                 style={styles.imgStyle}
@@ -95,3 +95,4 @@ export default class ImgApp extends Component {
     }
 }
 
+    

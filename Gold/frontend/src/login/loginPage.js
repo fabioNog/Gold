@@ -3,11 +3,12 @@ import axios from 'axios'
 
 import TextField from 'material-ui/TextField';
 import { Grid, Row, Col } from 'react-flexbox-grid';
-import IconButtom from '../template/iconButton'
+import IconButtom from '../template/iconButton';
 
 
 // import PageHeader from './pageHeader'
 const URL = 'http://localhost:3003/api/vencis'
+
 
 
 
@@ -73,18 +74,17 @@ export default class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            username: '',
-            password: '',
+            name: '',
+            password: ''
 
         }
 
-        this.handleChangeEmail = this.handleChangeEmail.bind(this)
+      
         this.handleChangeUsername = this.handleChangeUsername.bind(this)
         this.handleChangePassword = this.handleChangePassword.bind(this)
-        this.handleChangePasswordComp = this.handleChangePasswordComp.bind(this)
-        this.handleAdd = this.handleAdd.bind(this)
-        this.refresh = this.refresh.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
+        
+        
 
 
     }
@@ -94,27 +94,30 @@ export default class Form extends Component {
             .then(resp => console.log(resp.data))
     }
 
-    handleChangeEmail(e) {
-        this.setState({ ...this.state, email: e.target.value })
+
+    handleChangeUsername(e) {
+        this.setState({ ...this.state, name: e.target.value })
     }
 
     handleChangePassword(e) {
         this.setState({ ...this.state, password: e.target.value })
     }
 
+    onSubmit(e){
+        e.preventDefault();
+        // console.log(this.state);
+        axios.post('/api/users',{user:this.state});
+        
+    }
 
     handleAdd() {
         // console.log(this.state.description)
-       const email = this.state.email;
+        const email = this.state.email;
         const password = this.state.password;
-        
 
-        
-            axios.post(URL, { email, password})
-                .then(resp => console.log('Funcionou'))
-                .catch(err => console.log(err))
-
-
+        axios.post(URL, { email, password })
+            .then(resp => console.log('Funcionou'))
+            .catch(err => console.log(err))
     }
 
 
@@ -123,19 +126,27 @@ export default class Form extends Component {
         return (
             <div >
                 {/* <PageHeader name={'Tarefas'} small='Login'/> */}
-                <form style={styles.formStyle}>
+                <form style={styles.formStyle} >
 
 
                     <Grid fluid style={styles.gridStyle}>
-                        <Row><h2>Entrar</h2></Row>
+                        <Row>
+                            <Col xs={12} md={12} lg={6} lgOffset={3}>
+                                <h2>Entrar</h2>
+                            </Col>
+                        </Row>
                         {/* Email */}
                         <Row>
                             <Col xs={12} md={12} lg={6} lgOffset={3}>
                                 <TextField style={styles.paper2}
-                                    floatingLabelText={'Email'}
-                                    id="email"
-                                    // description={this.description}
-                                    onChange={this.handleChangeEmail} />
+                                    floatingLabelText={'Username'}
+                                    id="name"
+                                    type="text"
+                                // description={this.description}
+                                value={this.state.name}
+                                onChange={this.handleChangeUsername}
+                                //  
+                                />
                             </Col>
                         </Row>
 
@@ -144,8 +155,9 @@ export default class Form extends Component {
                             <Col xs={12} md={12} lg={6} lgOffset={3}>
                                 <TextField
                                     style={styles.paper2}
-                                    floatingLabelText={'password'}
+                                    floatingLabelText={'Password'}
                                     id="password"
+                                    value={this.state.password}
                                     onChange={this.handleChangePassword}
                                 />
                             </Col>
@@ -155,8 +167,9 @@ export default class Form extends Component {
                             <Col xs={8} md={12} lg={6} xsOffset={4} lgOffset={3}>
                                 <IconButtom
                                     className='Button'
-                                    // style={styles.botoonStyle}
-                                    onClick={this.handleAdd} />
+                                    onClick={this.onSubmit}
+                                // style={styles.botoonStyle}
+                                />
                             </Col>
                         </Row>
                     </Grid>

@@ -9,6 +9,7 @@ import { indigo700, blueGrey800 } from 'material-ui/styles/colors';
 
 import Header from '../template/header'
 
+
 const muiTheme = getMuiTheme({
     palette: {
         primary1Color: indigo700,
@@ -49,7 +50,8 @@ export default class AppB extends Component {
             <MuiThemeProvider muiTheme={muiTheme}>
                 <div>
                     <Header/>
-                    <Login/>
+                    {/* <Teste/> */}
+                   <Login/>
 
                     <div style={styles.ImgStyle}>
                         
