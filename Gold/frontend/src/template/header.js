@@ -35,7 +35,7 @@ export default class Header extends Component {
                     {
                         <div>
                             <Link to='/blog'><FlatButton label="blog" /></Link>
-                            <Link to='/register'><FlatButton label="Cadastrar" /></Link>
+                            <Link to='/signupPage'><FlatButton label="Cadastrar" /></Link>
                             <Link to='/login'><FlatButton label="Entrar" style={styles.flatButtonStyle} /></Link>
 
 
